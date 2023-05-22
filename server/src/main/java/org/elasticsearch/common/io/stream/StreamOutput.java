@@ -8,6 +8,8 @@
 
 package org.elasticsearch.common.io.stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.util.BitUtil;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.BytesRefBuilder;
@@ -60,7 +62,7 @@ import static java.util.Map.entry;
  * on {@link StreamInput}.
  */
 public abstract class StreamOutput extends OutputStream {
-
+    private static final Logger logger = LogManager.getLogger(StreamOutput.class);
     private TransportVersion version = TransportVersion.CURRENT;
 
     /**
@@ -834,7 +836,12 @@ public abstract class StreamOutput extends OutputStream {
         if (writer != null) {
             writer.write(this, value);
         } else {
-            throw new IllegalArgumentException("can not write type [" + type + "]");
+            try {
+                throw new IllegalArgumentException("can not write type [" + type + "]");
+            } catch (IllegalArgumentException e) {
+                logger.error("e", e);
+                throw e;
+            }
         }
     }
 
