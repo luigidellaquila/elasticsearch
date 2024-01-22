@@ -1,0 +1,40 @@
+import org.elasticsearch.gradle.internal.info.BuildParams
+
+/*
+ * This project is named sql-cli because it is in the "org.elasticsearch.plugin"
+ * group and it'd be super confusing for it to just be called "cli" there.
+ * Also, the jar we ultimately want to ship is sql-cli-VERSION.jar which is
+ * exactly what gradle makes by default when the project is named sql-cli.
+ */
+
+apply plugin: 'elasticsearch.build'
+apply plugin: 'elasticsearch.internal-es-plugin'
+
+/* We don't use the 'application' plugin because it builds a zip and tgz which
+ * we don't want. */
+
+base {
+  archivesName = 'elasticsearch-sql-esql'
+}
+
+description = ''
+
+dependencies {
+  api "org.apache.logging.log4j:log4j-api:${versions.log4j}"
+  api "org.jline:jline-terminal:${jlineVersion}"
+  api( "org.jline:jline-terminal-jna:${jlineVersion}") {
+    exclude group: "net.java.dev.jna"
+  }
+  api "org.jline:jline-reader:${jlineVersion}"
+  api "org.jline:jline-style:${jlineVersion}"
+
+
+  api project(':x-pack:plugin:sql:sql-proto')
+  api project(':x-pack:plugin:sql:sql-client')
+  api project(':x-pack:plugin:sql')
+  api project(':x-pack:plugin:esql')
+  api project(":libs:elasticsearch-cli")
+  runtimeOnly "net.java.dev.jna:jna:${versions.jna}"
+  runtimeOnly "org.apache.logging.log4j:log4j-core:${versions.log4j}"
+  testImplementation project(":test:framework")
+}
