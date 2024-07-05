@@ -106,7 +106,12 @@ public class EsqlCapabilities {
         /**
          * Support for WEIGHTED_AVG function.
          */
-        AGG_WEIGHTED_AVG;
+        AGG_WEIGHTED_AVG,
+
+        /**
+         * Support for methods in ESQL grammar
+         */
+        METHODS;
 
         private final boolean snapshotOnly;
 

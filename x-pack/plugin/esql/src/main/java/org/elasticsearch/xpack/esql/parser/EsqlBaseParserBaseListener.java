@@ -281,6 +281,18 @@ public class EsqlBaseParserBaseListener implements EsqlBaseParserListener {
    *
    * <p>The default implementation does nothing.</p>
    */
+  @Override public void enterMethodInvocation(EsqlBaseParser.MethodInvocationContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitMethodInvocation(EsqlBaseParser.MethodInvocationContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
   @Override public void enterFunction(EsqlBaseParser.FunctionContext ctx) { }
   /**
    * {@inheritDoc}
@@ -300,6 +312,18 @@ public class EsqlBaseParserBaseListener implements EsqlBaseParserListener {
    * <p>The default implementation does nothing.</p>
    */
   @Override public void exitFunctionExpression(EsqlBaseParser.FunctionExpressionContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterMethodExpression(EsqlBaseParser.MethodExpressionContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitMethodExpression(EsqlBaseParser.MethodExpressionContext ctx) { }
   /**
    * {@inheritDoc}
    *
